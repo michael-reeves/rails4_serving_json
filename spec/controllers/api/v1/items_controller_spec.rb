@@ -18,4 +18,17 @@ describe Api::V1::ItemsController, type: :controller do
     end
   end
 
+  context '#show' do
+    it 'returns a single item' do
+      get :show, format: :json, id: Item.first.id
+      
+      item = JSON.parse( response.body, symbolize_names: true )
+
+      expect(response).to have_http_status :success
+
+      expect(item[:name]).to eq 'Lannister'
+      expect(item[:description]).to eq 'My uncle is my dad'
+    end
+  end
+
 end
