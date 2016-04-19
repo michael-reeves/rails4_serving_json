@@ -10,7 +10,7 @@ describe Api::V1::ItemsController, type: :controller do
       items = JSON.parse( response.body, symbolize_names: true )
       item  = items.first
 
-      expect( response ).to have_http_status :success
+      expect( response ).to           have_http_status :success
 
       expect( items.count ).to        eq 2
       expect( item[:name] ).to        eq 'Lannister'
@@ -24,7 +24,7 @@ describe Api::V1::ItemsController, type: :controller do
 
       item = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to have_http_status :success
+      expect( response ).to           have_http_status :success
 
       expect( item[:name] ).to        eq 'Lannister'
       expect( item[:description] ).to eq 'My uncle is my dad'
@@ -40,13 +40,31 @@ describe Api::V1::ItemsController, type: :controller do
       item      = Item.last
       json_item = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to have_http_status :success
+      expect( response ).to         have_http_status :success
 
       expect( item.name ).to        eq 'Arya'
       expect( item.description ).to eq 'Is not blind'
 
       expect( json_item[:name] ).to        eq 'Arya'
       expect( json_item[:description] ).to eq 'Is not blind'
+    end
+  end
+
+  context '#update' do
+    it 'alters a record' do
+      item_params = { name: 'Arya', description: 'Is not blind' }
+      old_item    = Item.first
+
+      patch :update, format: :json, id: old_item.id, item: item_params
+
+      new_item    = Item.find_by( id: old_item.id )
+
+      expect(response).to                   have_http_status :success
+
+      expect( new_item.name ).to            eq 'Arya'
+      expect( new_item.description ).to     eq 'Is not blind'
+      expect( new_item.name ).not_to        eq old_item.name
+      expect( new_item.description ).not_to eq old_item.description
     end
   end
 
