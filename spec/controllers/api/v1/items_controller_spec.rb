@@ -68,4 +68,24 @@ describe Api::V1::ItemsController, type: :controller do
     end
   end
 
+  context '#destroy' do
+    it 'removes a record' do
+      # old_item = Item.first
+      # count    = Item.count
+      #
+      # delete :destroy, format: :json, id: old_item.id
+      #
+      # new_item = Item.find_by( id: old_item.id )
+      #
+      # expect( response ).to   have_http_status :success
+      #
+      # expect( new_item ).to   be_nil
+      # expect( Item.count ).to eq ( count - 1 )
+
+      expect { delete :destroy, format: :json, id: Item.first.id }.to change{ Item.count }.by( -1 )
+
+      expect(response).to have_http_status :success
+    end
+  end
+
 end
