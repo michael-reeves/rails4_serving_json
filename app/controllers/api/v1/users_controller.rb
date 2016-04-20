@@ -13,6 +13,10 @@ class Api::V1::UsersController < ApplicationController
     respond_with User.create(user_params), location: nil
   end
 
+  def update
+    respond_with User.update(params[:id], user_params)
+  end
+
   private
 
     def user_params

@@ -50,4 +50,22 @@ describe Api::V1::UsersController, type: :controller do
     end
   end
 
+  context '#update' do
+    it 'alters a record' do
+      user_params = { name: 'Arya Stark', email: 'arya@stark.org' }
+      old_user    = User.first
+
+      patch :update, format: :json, id: old_user.id, user: user_params
+
+      new_user    = User.find_by( id: old_user.id )
+
+      expect( response ).to           have_http_status :success
+
+      expect( new_user.name  ).to     eq 'Arya Stark'
+      expect( new_user.email ).to     eq 'arya@stark.org'
+      expect( new_user.name  ).not_to eq old_user.name
+      expect( new_user.email ).not_to eq old_user.email
+    end
+  end
+
 end
