@@ -8,4 +8,14 @@ class Api::V1::UsersController < ApplicationController
   def show
     respond_with User.find_by(id: params[:id])
   end
+
+  def create
+    respond_with User.create(user_params), location: nil
+  end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:name, :email)
+    end
 end
