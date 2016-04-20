@@ -12,8 +12,21 @@ describe Api::V1::UsersController, type: :controller do
 
       expect( response ).to     have_http_status :success
 
-      expect( users.count ).to  eq 2
-      expect( user[:name] ).to  eq 'Tyrion Lannister'
+      expect( users.count  ).to eq 2
+      expect( user[:name]  ).to eq 'Tyrion Lannister'
+      expect( user[:email] ).to eq 'tyrion@lannister.com'
+    end
+  end
+
+  context '#show' do
+    it 'returns a single user' do
+      get :show, format: :json, id: User.first.id
+
+      user = JSON.parse( response.body, symbolize_names: true )
+
+      expect( response ).to     have_http_status :success
+
+      expect( user[:name]  ).to eq 'Tyrion Lannister'
       expect( user[:email] ).to eq 'tyrion@lannister.com'
     end
   end
