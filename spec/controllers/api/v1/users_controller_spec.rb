@@ -68,4 +68,12 @@ describe Api::V1::UsersController, type: :controller do
     end
   end
 
+  context '#destroy' do
+    it 'removes a record' do
+      expect { delete :destroy, format: :json, id: User.first.id }.to change{ User.count }.by( -1 )
+
+      expect( response ).to have_http_status :success
+    end
+  end
+
 end
