@@ -10,11 +10,11 @@ describe Api::V1::ItemsController, type: :controller do
       items = JSON.parse( response.body, symbolize_names: true )
       item  = items.first
 
-      expect( response ).to           have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( items.count ).to        eq 2
-      expect( item[:name] ).to        eq 'Lannister'
-      expect( item[:description] ).to eq 'My uncle is my dad'
+      expect( item[:name] ).to        eq 'Oathkeeper'
+      expect( item[:description] ).to eq "Jamie Lannister's sword"
     end
   end
 
@@ -24,10 +24,10 @@ describe Api::V1::ItemsController, type: :controller do
 
       item = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to           have_http_status :success
+      expect( response ).to have_http_status :success
 
-      expect( item[:name] ).to        eq 'Lannister'
-      expect( item[:description] ).to eq 'My uncle is my dad'
+      expect( item[:name] ).to        eq 'Oathkeeper'
+      expect( item[:description] ).to eq "Jamie Lannister's sword"
     end
   end
 
@@ -40,7 +40,7 @@ describe Api::V1::ItemsController, type: :controller do
       item      = Item.last
       json_item = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to         have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( item.name ).to        eq 'Arya'
       expect( item.description ).to eq 'Is not blind'

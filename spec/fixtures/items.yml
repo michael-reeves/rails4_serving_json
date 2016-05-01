@@ -1,7 +1,7 @@
-one:
-  name:        Jon Snow
-  description: Knows nothing
+oathkeeper:
+  name:        Oathkeeper
+  description: Jamie Lannister's sword
 
-two:
-  name:        Lannister
-  description: My uncle is my dad
+needle:
+  name:        Needle
+  description: Arya Stark's sword

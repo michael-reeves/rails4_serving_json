@@ -10,9 +10,9 @@ describe Api::V1::UsersController, type: :controller do
       users = JSON.parse( response.body, symbolize_names: true )
       user  = users.first
 
-      expect( response ).to     have_http_status :success
+      expect( response ).to have_http_status :success
 
-      expect( users.count  ).to eq 2
+      expect( users.count  ).to eq 3
       expect( user[:name]  ).to eq 'Tyrion Lannister'
       expect( user[:email] ).to eq 'tyrion@lannister.com'
     end
@@ -24,7 +24,7 @@ describe Api::V1::UsersController, type: :controller do
 
       user = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to     have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( user[:name]  ).to eq 'Tyrion Lannister'
       expect( user[:email] ).to eq 'tyrion@lannister.com'
@@ -40,7 +40,7 @@ describe Api::V1::UsersController, type: :controller do
       user = User.last
       json_user = JSON.parse( response.body, symbolize_names: true )
 
-      expect( response ).to  have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( user.name  ).to eq 'Arya Stark'
       expect( user.email ).to eq 'arya@stark.org'
@@ -59,7 +59,7 @@ describe Api::V1::UsersController, type: :controller do
 
       new_user    = User.find_by( id: old_user.id )
 
-      expect( response ).to           have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( new_user.name  ).to     eq 'Arya Stark'
       expect( new_user.email ).to     eq 'arya@stark.org'
