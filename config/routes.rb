@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   # API routes
   namespace :api do
     namespace :v1 do
-      resources :items, except: [:new, :edit]
-      resources :users, except: [:new, :edit]
-      resources :orders, only: [:index, :show]
+      resources :items,  except: [:new, :edit]
+      resources :users,  except: [:new, :edit]
+      resources :orders, only: [:index, :show, :create]
     end
   end
 

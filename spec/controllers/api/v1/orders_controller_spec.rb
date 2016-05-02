@@ -41,4 +41,24 @@ describe Api::V1::OrdersController, type: :controller do
       expect( order[:user_id] ).to     eq 468504389
     end
   end
+
+  context '#create' do
+    it 'adds a new order' do
+      order_params = { amount: 4000.00, user_id: User.first.id }
+      
+      post :create, format: :json, order: order_params
+      
+      order      = Order.last
+      json_order = JSON.parse( response.body, symbolize_names: true )
+
+      expect(response).to have_http_status :success
+
+      expect( order.amount ).to    eq 4000.0
+      expect( order.user.name ).to eq 'Tyrion Lannister'
+
+      expect( json_order[:amount].to_f ).to eq 4000.0
+      expect( json_order[:user_id] ).to     eq 468504389
+    end
+  end
+
 end
