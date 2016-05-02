@@ -5,3 +5,7 @@ oathkeeper:
 needle:
   name:        Needle
   description: Arya Stark's sword
+
+longclaw:
+  name:        Longclaw
+  description: Jon Snow's sword

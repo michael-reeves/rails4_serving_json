@@ -1,11 +1,12 @@
 one:
-  amount: 12.99
-  user_id: 1
+  amount: 199.99
+  user:   jon
 
 two:
-  amount: 199.99
-  user_id: 2
+  amount: 799.95
+  user:   tyrion
 
 three:
   amount: 5000.00
-  user_id: 2
+  user:   tyrion
+

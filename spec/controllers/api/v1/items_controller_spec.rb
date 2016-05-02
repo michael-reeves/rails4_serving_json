@@ -12,7 +12,7 @@ describe Api::V1::ItemsController, type: :controller do
 
       expect( response ).to have_http_status :success
 
-      expect( items.count ).to        eq 2
+      expect( items.count ).to        eq 3
       expect( item[:name] ).to        eq 'Oathkeeper'
       expect( item[:description] ).to eq "Jamie Lannister's sword"
     end

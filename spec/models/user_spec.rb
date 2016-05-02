@@ -1,24 +1,21 @@
 require 'rails_helper'
 
 describe User, type: :model do
-  fixtures :users
+  fixtures :users, :orders
 
-  let(:lannister) { User.first }
+  let(:tyrion) { User.first }
   
   it '#name exists' do
-    expect( lannister.name ).to eq 'Tyrion Lannister'
+    expect( tyrion.name ).to eq 'Tyrion Lannister'
   end
 
   it '#email exists' do
-    expect( lannister.email ).to eq 'tyrion@lannister.com'
+    expect( tyrion.email ).to eq 'tyrion@lannister.com'
   end
 
   it 'has orders' do
-    lannister.orders << Order.create!( amount: 100.0 )
-    lannister.orders << Order.create!( amount: 599.99 )
-
-    expect( lannister.orders.count ).to        eq 2
-    expect( lannister.orders.first.amount ).to eq 100.0
-    expect( lannister.orders.last.amount  ).to eq 599.99
+    expect( tyrion.orders.count ).to        eq 2
+    expect( tyrion.orders.first.amount ).to eq 5000
+    expect( tyrion.orders.last.amount  ).to eq 799.95
   end
 end
