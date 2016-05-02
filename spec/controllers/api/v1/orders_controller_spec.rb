@@ -28,4 +28,17 @@ describe Api::V1::OrdersController, type: :controller do
       expect( order[:user_id] ).to     eq 468504389
     end
   end
+
+  context '#show' do
+    it 'displays a single order' do
+      get :show, format: :json, id: Order.first.id
+
+      order = JSON.parse( response.body, symbolize_names: true )
+
+      expect(response).to have_http_status :success
+
+      expect( order[:amount].to_f ).to eq 5000.0
+      expect( order[:user_id] ).to     eq 468504389
+    end
+  end
 end
