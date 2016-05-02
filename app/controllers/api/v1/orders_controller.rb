@@ -17,6 +17,10 @@ class Api::V1::OrdersController < ApplicationController
     respond_with Order.update(params[:id], order_params)
   end
 
+  def destroy
+    respond_with Order.destroy(params[:id])
+  end
+
   private
 
     def order_params

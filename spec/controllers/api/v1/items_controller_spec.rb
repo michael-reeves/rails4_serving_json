@@ -59,7 +59,7 @@ describe Api::V1::ItemsController, type: :controller do
 
       new_item    = Item.find_by( id: old_item.id )
 
-      expect( response ).to                 have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( new_item.name ).to            eq 'Arya'
       expect( new_item.description ).to     eq 'Is not blind'

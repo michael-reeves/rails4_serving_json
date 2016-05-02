@@ -1,18 +1,7 @@
 require 'rails_helper'
 
 describe Api::V1::OrdersController, type: :controller do
-  fixtures :all
-
-  before(:each) do
-    orders = Order.all
-    order0 = orders[0]
-    order1 = orders[1]
-    order2 = orders[2]
-
-    order0.items << Item.first
-    order1.items << Item.last
-    order2.items << Item.all
-  end
+  fixtures :orders, :users
 
   context '#index' do
     it 'successfully returns all orders' do
@@ -35,7 +24,7 @@ describe Api::V1::OrdersController, type: :controller do
 
       order = JSON.parse( response.body, symbolize_names: true )
 
-      expect(response).to have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( order[:amount].to_f ).to eq 5000.0
       expect( order[:user_id] ).to     eq 468504389
@@ -51,7 +40,7 @@ describe Api::V1::OrdersController, type: :controller do
       order      = Order.last
       json_order = JSON.parse( response.body, symbolize_names: true )
 
-      expect(response).to have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( order.amount ).to    eq 4000.0
       expect( order.user.name ).to eq 'Tyrion Lannister'
@@ -70,12 +59,19 @@ describe Api::V1::OrdersController, type: :controller do
 
       new_order    = Order.find_by( id: old_order.id )
 
-      expect(response).to have_http_status :success
+      expect( response ).to have_http_status :success
 
       expect( new_order.amount ).to     eq 3000.0
       expect( new_order.user.name ).to  eq 'Arya Stark'
       expect( new_order.amount ).not_to eq old_order.amount
       expect( new_order.user ).not_to   eq old_order.user
+    end
+  end
+
+  context '#destroy' do
+    it 'removes an order' do
+      expect{ delete :destroy, format: :json, id: Order.first.id }.to change{ Order.count }.by( -1 )
+      expect( response ).to have_http_status :success
     end
   end
 
