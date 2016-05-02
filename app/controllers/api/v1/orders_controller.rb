@@ -13,6 +13,10 @@ class Api::V1::OrdersController < ApplicationController
     respond_with Order.create(order_params), location: nil
   end
 
+  def update
+    respond_with Order.update(params[:id], order_params)
+  end
+
   private
 
     def order_params

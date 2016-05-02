@@ -61,4 +61,22 @@ describe Api::V1::OrdersController, type: :controller do
     end
   end
 
+  context '#update' do
+    it 'alters an order' do
+      order_params = { amount: 3000.0, user_id: User.second.id }
+      old_order    = Order.first
+
+      patch :update, format: :json, id: old_order.id,  order: order_params
+
+      new_order    = Order.find_by( id: old_order.id )
+
+      expect(response).to have_http_status :success
+
+      expect( new_order.amount ).to     eq 3000.0
+      expect( new_order.user.name ).to  eq 'Arya Stark'
+      expect( new_order.amount ).not_to eq old_order.amount
+      expect( new_order.user ).not_to   eq old_order.user
+    end
+  end
+
 end

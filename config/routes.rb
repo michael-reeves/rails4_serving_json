@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :items,  except: [:new, :edit]
       resources :users,  except: [:new, :edit]
-      resources :orders, only: [:index, :show, :create]
+      resources :orders, only: [:index, :show, :create, :update]
     end
   end
 
